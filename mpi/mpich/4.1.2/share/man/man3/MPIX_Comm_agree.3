@@ -1,0 +1,126 @@
+.TH MPIX_Comm_agree 3 "6/7/2023" " " "MPI"
+.SH NAME
+MPIX_Comm_agree \-  Performs agreement operation on comm 
+.SH SYNOPSIS
+.nf
+.fi
+.nf
+int MPIX_Comm_agree(MPI_Comm comm, int *flag)
+.fi
+
+
+.SH INPUT PARAMETERS
+.PD 0
+.TP
+.B comm 
+- communicator (handle)
+.PD 1
+
+.SH OUTPUT PARAMETERS
+.PD 0
+.TP
+.B flag 
+- new communicator (logical)
+.PD 1
+
+.SH NOTES
+The purpose of this collective communication is to agree on the integer value flag and on the group of failed processes in comm.
+
+On completion, all non-failed MPI processes have agreed to set the output integer value of flag to the result of a bitwise AND operation over the contributed input values of flag. If comm is an intercommunicator, the value of flagis a bitwise AND operation over the values contributed by the remote group.
+
+When an MPI process fails before contributing to the operation, the flag is computed ignoring its contribution, and MPIX_Comm_agree raises an error of class MPI_ERR_PROC_FAILED. However, if all MPI processes have acknowledged this failure priorto the call to MPIX_Comm_agree, using MPIX_Comm_failure_ack, the error related to this failure is not raised. When an error of class MPI_ERR_PROC_FAILED is raised, it is consistently raised at allMPI processes, in both the local and remote groups (if applicable).
+
+After MPIX_Comm_agree raised an error of class MPI_ERR_PROC_FAILED, a subse-quent call to MPIX_Comm_failure_ack on comm acknowledges the failure of every MPI process that didn
+.I t contribute to the computation offlag.
+
+.SH THREAD AND INTERRUPT SAFETY
+
+This routine is thread-safe.  This means that this routine may be
+safely used by multiple threads without the need for any user-provided
+thread locks.  However, the routine is not interrupt safe.  Typically,
+this is due to the use of memory allocation routines such as 
+malloc
+.I or other non-MPICH runtime routines that are themselves not interrupt-safe.
+
+.SH NOTES FOR FORTRAN
+All MPI routines in Fortran (except for 
+MPI_WTIME
+.I  and 
+MPI_WTICK
+.I ) have
+an additional argument 
+ierr
+.I  at the end of the argument list.  
+ierr
+.I is an integer and has the same meaning as the return value of the routine
+in C.  In Fortran, MPI routines are subroutines, and are invoked with the
+call
+.I  statement.
+
+All MPI objects (e.g., 
+MPI_Datatype
+.I , 
+MPI_Comm
+.I ) are of type 
+INTEGER
+.I in Fortran.
+
+.SH ERRORS
+
+All MPI routines (except 
+MPI_Wtime
+.I  and 
+MPI_Wtick
+.I ) return an error value;
+C routines as the value of the function and Fortran routines in the last
+argument.  Before the value is returned, the current MPI error handler is
+called.  By default, this error handler aborts the MPI job.  The error handler
+may be changed with 
+MPI_Comm_set_errhandler
+.I  (for communicators),
+MPI_File_set_errhandler
+.I  (for files), and 
+MPI_Win_set_errhandler
+.I  (for
+RMA windows).  The MPI-1 routine 
+MPI_Errhandler_set
+.I  may be used but
+its use is deprecated.  The predefined error handler
+MPI_ERRORS_RETURN
+.I  may be used to cause error values to be returned.
+Note that MPI does 
+.B not
+guarantee that an MPI program can continue past
+an error; however, MPI implementations will attempt to continue whenever
+possible.
+
+.PD 0
+.TP
+.B MPI_SUCCESS 
+- No error; MPI routine completed successfully.
+.PD 1
+.PD 0
+.TP
+.B MPI_ERR_ARG 
+- Invalid argument.  Some argument is invalid and is not
+identified by a specific error class (e.g., 
+MPI_ERR_RANK
+.I ).
+.PD 1
+.PD 0
+.TP
+.B MPI_ERR_COMM 
+- Invalid communicator.  A common error is to use a null
+communicator in a call (not even allowed in 
+MPI_Comm_rank
+.I ).
+.PD 1
+.PD 0
+.TP
+.B MPI_ERR_OTHER 
+- Other error; use 
+MPI_Error_string
+.I  to get more information
+about this error code. 
+.PD 1
+

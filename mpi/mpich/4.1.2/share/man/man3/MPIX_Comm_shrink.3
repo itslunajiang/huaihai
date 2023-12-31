@@ -1,0 +1,26 @@
+.TH MPIX_Comm_shrink 3 "6/7/2023" " " "MPI"
+.SH NAME
+MPIX_Comm_shrink \-  Creates a new communitor from an existing communicator while excluding failed processes 
+.SH SYNOPSIS
+.nf
+.fi
+.nf
+int MPIX_Comm_shrink(MPI_Comm comm, MPI_Comm *newcomm)
+.fi
+
+
+.SH INPUT PARAMETERS
+.PD 0
+.TP
+.B comm 
+- communicator (handle)
+.PD 1
+
+.SH OUTPUT PARAMETERS
+.PD 0
+.TP
+.B newcomm 
+- new communicator (handle)
+.PD 1
+
+.SH NOTES

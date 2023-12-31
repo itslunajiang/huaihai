@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML3.2 EN">
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" CONTENT="DOCTEXT">
+<TITLE>hydra_nameserver</TITLE>
+</HEAD>
+<BODY BGCOLOR="FFFFFF">
+<H1 id="hydra_nameserver">hydra_nameserver</H1>
+program to support MPI<tt>s name publishing features with hydra 
+<H2>Description</H2>
+Hydra is the default name service for MPI\</tt>s name publishing features
+(MPI_PUBLISH_NAME/MPI_LOOKUP_NAME). For programs launched by separate
+hydra instances, a separate nameserver mechanism need be launched in
+order for the name publishing to work across multiple process managers.
+<P>
+This can be achieved with hydra_nameserver. For example:
+<PRE>
+    shell@myhost1$ hydra_nameserver &amp;
+    shell@myhost1$ mpiexec -hosts myhost1,myhost2 -n 4 -nameserver myhost1 ./a.out
+</PRE>
+
+<P><B>Location:</B>/var/tmp/Mo8Z7D0gzL/mpich-4.1.2/src/pm/hydra/mansrc/hydra_nameserver.txt<P>
+</BODY></HTML>

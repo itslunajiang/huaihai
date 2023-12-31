@@ -1,0 +1,23 @@
+.TH MPI_Wtime 3 "6/7/2023" " " "MPI"
+.SH NAME
+MPI_Wtime \-  Returns an elapsed time on the calling processor 
+.SH SYNOPSIS
+.nf
+.fi
+.nf
+double MPI_Wtime(void)
+.fi
+
+
+.SH RETURN VALUE
+Time in seconds of resolution of MPI_Wtime
+
+.SH NOTES FOR FORTRAN
+This is a function, declared as 
+.I DOUBLE PRECISION MPI_WTICK()
+in Fortran.
+
+
+.SH SEE ALSO
+MPI_Wtime, MPI_Comm_get_attr, MPI_Attr_get
+.br

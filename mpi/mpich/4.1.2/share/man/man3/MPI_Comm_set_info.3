@@ -1,0 +1,153 @@
+.TH MPI_Comm_set_info 3 "6/7/2023" " " "MPI"
+.SH NAME
+MPI_Comm_set_info \-  Set new values for the hints of the communicator associated with comm 
+.SH SYNOPSIS
+.nf
+.fi
+.nf
+int MPI_Comm_set_info(MPI_Comm comm, MPI_Info info)
+.fi
+
+
+.SH INPUT PARAMETERS
+.PD 0
+.TP
+.B comm 
+- communicator (handle)
+.PD 1
+.PD 0
+.TP
+.B info 
+- info object (handle)
+.PD 1
+
+.SH NOTES
+The call is collective on the group of comm. The info object may be different
+on each process, but any info entries that an implementation requires to be
+the same on all processes must appear with the same value in each process
+.I info object.
+
+.SH INFO HINTS
+.PD 0
+.TP
+.B mpi_assert_no_any_tag 
+- boolean, default = false.
+If set to true, user promises that MPI_ANY_TAG will not be used with the
+communicator. This potentially allows MPICH to treat messages with different
+tags independent and seek to improve performance, e.g. by employ multiple
+network context.
+.PD 1
+.PD 0
+.TP
+.B mpi_assert_no_any_source 
+- boolean, default = false.
+If set to true, user promises that MPI_ANY_SOURCE will not be used with the
+communicator. This potentially allows MPICH to treat messages send to different
+ranks or receive from different ranks independent and seek to improve
+performance, e.g. by employ multiple network context.
+.PD 1
+.PD 0
+.TP
+.B mpi_assert_exact_length 
+- boolean, default = false.
+If set to true, user promises that the lengths of messages received by the
+process will always equal to the size of the corresponding receive buffers.
+.PD 1
+.PD 0
+.TP
+.B mpi_assert_allow_overtaking 
+- boolean, default = false.
+If set to true, user asserts that send operations are not required to be matched
+at the receiver in the order in which the send operations were performed by the
+sender, and receive operations are not required to be matched in the order in
+which they were performed by the receivers.
+.PD 1
+
+.SH THREAD AND INTERRUPT SAFETY
+
+This routine is thread-safe.  This means that this routine may be
+safely used by multiple threads without the need for any user-provided
+thread locks.  However, the routine is not interrupt safe.  Typically,
+this is due to the use of memory allocation routines such as 
+malloc
+.I or other non-MPICH runtime routines that are themselves not interrupt-safe.
+
+.SH NOTES FOR FORTRAN
+All MPI routines in Fortran (except for 
+MPI_WTIME
+.I  and 
+MPI_WTICK
+.I ) have
+an additional argument 
+ierr
+.I  at the end of the argument list.  
+ierr
+.I is an integer and has the same meaning as the return value of the routine
+in C.  In Fortran, MPI routines are subroutines, and are invoked with the
+call
+.I  statement.
+
+All MPI objects (e.g., 
+MPI_Datatype
+.I , 
+MPI_Comm
+.I ) are of type 
+INTEGER
+.I in Fortran.
+
+.SH ERRORS
+
+All MPI routines (except 
+MPI_Wtime
+.I  and 
+MPI_Wtick
+.I ) return an error value;
+C routines as the value of the function and Fortran routines in the last
+argument.  Before the value is returned, the current MPI error handler is
+called.  By default, this error handler aborts the MPI job.  The error handler
+may be changed with 
+MPI_Comm_set_errhandler
+.I  (for communicators),
+MPI_File_set_errhandler
+.I  (for files), and 
+MPI_Win_set_errhandler
+.I  (for
+RMA windows).  The MPI-1 routine 
+MPI_Errhandler_set
+.I  may be used but
+its use is deprecated.  The predefined error handler
+MPI_ERRORS_RETURN
+.I  may be used to cause error values to be returned.
+Note that MPI does 
+.B not
+guarantee that an MPI program can continue past
+an error; however, MPI implementations will attempt to continue whenever
+possible.
+
+.PD 0
+.TP
+.B MPI_SUCCESS 
+- No error; MPI routine completed successfully.
+.PD 1
+.PD 0
+.TP
+.B MPI_ERR_COMM 
+- Invalid communicator.  A common error is to use a null
+communicator in a call (not even allowed in 
+MPI_Comm_rank
+.I ).
+.PD 1
+.PD 0
+.TP
+.B MPI_ERR_INFO 
+- Invalid Info 
+.PD 1
+.PD 0
+.TP
+.B MPI_ERR_OTHER 
+- Other error; use 
+MPI_Error_string
+.I  to get more information
+about this error code. 
+.PD 1
+

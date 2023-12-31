@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug",
+            "program": "${workspaceFolder}/DebugFiles/${fileBasenameNoExtension}",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "internalConsoleOptions": "neverOpen", // 如果不设为neverOpen，调试时会跳到 "调试控制台" 选项卡，你应该不需要对gdb手动输命令吧？
+            "preLaunchTask": "Build with Clang"
+        }
+    ]
+}

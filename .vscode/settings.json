@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "mpi.h": "c",
+        "omp.h": "c",
+        "stddef.h": "c"
+    }
+}

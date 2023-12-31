@@ -1,0 +1,20 @@
+# this gives access to the mpich header files
+prefix=/opt/homebrew/Cellar/mpich/4.1.2
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: mpich
+Description: High Performance and portable MPI
+Version: 4.1.2
+URL: http://www.mcs.anl.gov/research/projects/mpich
+Requires:
+Libs:    -Wl,-commons,use_dylibs -L${libdir} -lmpi -lpmpi  -lpthread  -lhwloc 
+Cflags:   -g -I${includedir}
+
+# pkg-config does not understand Cxxflags, etc. So we allow users to
+# query them using the --variable option
+
+cxxflags=  -g -I${includedir}
+fflags=-fallow-argument-mismatch -g -I${includedir}
+fcflags=-fallow-argument-mismatch -g -I${includedir}

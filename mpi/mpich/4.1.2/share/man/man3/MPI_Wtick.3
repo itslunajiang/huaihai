@@ -1,0 +1,38 @@
+.TH MPI_Wtick 3 "6/7/2023" " " "MPI"
+.SH NAME
+MPI_Wtick \-  Returns the resolution of MPI_Wtime 
+.SH SYNOPSIS
+.nf
+.fi
+.nf
+double MPI_Wtick(void)
+.fi
+
+
+.SH RETURN VALUE
+Time in seconds since an arbitrary time in the past.
+
+.SH NOTES
+This is intended to be a high-resolution, elapsed (or wall) clock.
+See 
+.I MPI_WTICK
+to determine the resolution of 
+.I MPI_WTIME
+\&.
+
+If the attribute 
+.I MPI_WTIME_IS_GLOBAL
+is defined and true, then the
+value is synchronized across all processes in 
+.I MPI_COMM_WORLD
+\&.
+
+
+.SH NOTES FOR FORTRAN
+This is a function, declared as 
+.I DOUBLE PRECISION MPI_WTIME()
+in Fortran.
+
+.SH SEE ALSO
+MPI_Wtick, MPI_Comm_get_attr, MPI_Attr_get
+.br

@@ -1,0 +1,19 @@
+.TH hydra_nameserver 1 "6/6/2023" " " "HYDRA"
+.SH NAME
+hydra_nameserver \-  program to support MPI
+.I s name publishing features with hydra 
+.SH DESCRIPTION
+Hydra is the default name service for MPI\\
+s name publishing features
+(MPI_PUBLISH_NAME/MPI_LOOKUP_NAME). For programs launched by separate
+hydra instances, a separate nameserver mechanism need be launched in
+order for the name publishing to work across multiple process managers.
+
+This can be achieved with hydra_nameserver. For example:
+.nf
+shell@myhost1$ hydra_nameserver &
+shell@myhost1$ mpiexec -hosts myhost1,myhost2 -n 4 -nameserver myhost1 ./a.out
+.fi
+
+.SH LOCATION
+/var/tmp/Mo8Z7D0gzL/mpich-4.1.2/src/pm/hydra/mansrc/hydra_nameserver.txt
