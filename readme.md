@@ -27,7 +27,6 @@ mpiGeometryProcessing传回关于结果的指针，可以选择结果的存储�
  
 ### mpi_geometry_processing.c
 !["程序结构"](./img/program_structure.png)
-
 其中，公共函数（例如mpiGeometryProcessing,**checkLineIntersections**, **checkIntersectionsAngle**需要在**mpi_geometry_processing.h**中进行声明
 
 # 3.输出结果示例
