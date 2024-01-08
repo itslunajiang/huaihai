@@ -3,5 +3,6 @@
         "mpi.h": "c",
         "omp.h": "c",
         "stddef.h": "c"
-    }
+    },
+    "cmake.sourceDirectory": "/Users/corb/Desktop/研0研1/平台求交对比/mpi多线程计算/huaihai/hiredis-master"
 }
